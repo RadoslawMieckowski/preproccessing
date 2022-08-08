@@ -1,8 +1,12 @@
 package utilites;
 
+import com.opencsv.CSVWriter;
+
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -53,16 +57,13 @@ public final class Preproccessor {
         return array;
     }
 
-    public static List<String> toListOfStrings(List list) {
-        list.stream().map(array -> String.join(",", Arrays.stream(array)));
-    }
+//    public static List<String> toListOfStrings(List list) {
+//        list.stream().map(array -> String.join(",", Arrays.stream(array)));
+//    }
 
-    public static void writeToFile(String path, ) {
-        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
-            bw.write(content);
-            bw.newLine();
+    public void writeAllLinesToFile(List<String[]> lines, Path path) throws Exception {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(path.toString()))) {
+            writer.writeAll(lines);
         }
     }
-
-
 }
