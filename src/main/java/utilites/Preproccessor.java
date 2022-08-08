@@ -1,8 +1,10 @@
 package utilites;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +51,17 @@ public final class Preproccessor {
         array[8] = String.valueOf(Calculator.calculateSimpleMovingAverage(45));
         array[9] = "0";
         return array;
+    }
+
+    public static List<String> toListOfStrings(List list) {
+        list.stream().map(array -> String.join(",", Arrays.stream(array)));
+    }
+
+    public static void writeToFile(String path, ) {
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            bw.write(content);
+            bw.newLine();
+        }
     }
 
 
