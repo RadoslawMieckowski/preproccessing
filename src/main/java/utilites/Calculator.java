@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Calculator {
-    private static double SMA_15_COUNTER = 1;
-    private static double SMA_45_COUNTER = 1;
-    private static double RSI_COUNTER = 1;
+    private static double SMA_15_COUNTER = 0;
+    private static double SMA_45_COUNTER = 0;
+    private static double RSI_COUNTER = 0;
     private static List<Double> SMA_15_STORAGE = new ArrayList<>(15);
     private static List<Double> SMA_45_STORAGE = new ArrayList<>(45);
     private static List<Double> RSI_14_STORAGE = new ArrayList<>(14);
