@@ -53,13 +53,9 @@ public final class Preproccessor {
         return array;
     }
 
-//    public static List<String> toListOfStrings(List list) {
-//        list.stream().map(array -> String.join(",", Arrays.stream(array)));
-//    }
-
     public static void writeAllLinesToFile(List<String[]> lines, Path path) throws Exception {
         try (CSVWriter writer = new CSVWriter(new FileWriter(path.toString()))) {
-            writer.writeAll(lines);
+            writer.writeAll(lines, false);
         }
     }
 }

@@ -1,5 +1,7 @@
 package utilites;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +39,7 @@ public final class Calculator {
                 result = 100 - (100 / (1 + positiveSum / negativeSum));
             }
         }
-        return result;
+        return round(result, 3);
     }
 
     public static double calculateSimpleMovingAverage15(double closePrice) {
@@ -53,7 +55,7 @@ public final class Calculator {
             result =  SMA_15_STORAGE.stream().reduce(result, Double::sum);
             result = result / 15;
         }
-        return result;
+        return round(result, 3);
     }
 
     public static double calculateSimpleMovingAverage45(double closePrice) {
@@ -69,6 +71,14 @@ public final class Calculator {
             result =  SMA_45_STORAGE.stream().reduce(result, Double::sum);
             result = result / 45;
         }
-        return result;
+        return round(result, 3);
+    }
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
