@@ -51,8 +51,8 @@ public final class Preproccessor {
         String[] array = new String[10];
         System.arraycopy(record, 0, array, 0, 6);
         array[6] = String.valueOf(Calculator.calculateRSI(14));
-        array[7] = String.valueOf(Calculator.calculateSimpleMovingAverage(15));
-        array[8] = String.valueOf(Calculator.calculateSimpleMovingAverage(45));
+        array[7] = String.valueOf(Calculator.calculateSimpleMovingAverage15(4));
+        array[8] = String.valueOf(Calculator.calculateSimpleMovingAverage45(4));
         array[9] = "0";
         return array;
     }
