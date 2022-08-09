@@ -1,10 +1,8 @@
 package utilites;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public final class Calculator {
     private static double SMA_15_COUNTER = 1;
@@ -20,6 +18,9 @@ public final class Calculator {
 
     public static double calculateRSI(double closePrice) {
         RSI_COUNTER++;
+        double differences[] = new double[13];
+        double negativeSum;
+        double positiveSum;
         double result = 0;
         //atualizowanie ostatnich 14-stu cen potrzebnych do wyliczenia średniej
         if (RSI_14_STORAGE.size() == 14) {
@@ -28,7 +29,13 @@ public final class Calculator {
         RSI_14_STORAGE.add(closePrice);
         //obliczanie RSI, jeżeli licznik jest równy przynajmniej 14
         if (RSI_COUNTER >= 14) {
-            RSI_14_STORAGE.stream().map(computeDifference.apply())
+            for (int i = 0; i < 13; i++) {
+                differences[i] = RSI_14_STORAGE.get(i + 1) - RSI_14_STORAGE.get(i);
+                positiveSum = Arrays.stream(differences).filter(change -> change > 0).sum();
+                negativeSum = Arrays.stream(differences).filter(change -> change < 0).sum();
+                negativeSum = Math.abs(negativeSum);
+                result = 100 - (100 / (1 + positiveSum / negativeSum));
+            }
         }
         return result;
     }
@@ -64,6 +71,4 @@ public final class Calculator {
         }
         return result;
     }
-
-    public static BiFunction<Double, Double, Double> computeDifference = (a, b) -> a - b;
 }
