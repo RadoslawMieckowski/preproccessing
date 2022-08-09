@@ -2,13 +2,11 @@ package utilites;
 
 import com.opencsv.CSVWriter;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,11 +17,8 @@ public final class Preproccessor {
     private Preproccessor() {
 
     }
-    public static void preproccessFile() {
 
-    }
-
-    protected static List<String[]> readFile(String fileName) throws IOException {
+    public static List<String[]> readFile(String fileName) throws IOException {
         List<String> result;
         try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
             result = lines.collect(Collectors.toList());
@@ -31,7 +26,7 @@ public final class Preproccessor {
         return result.stream().map(line -> line.split(",")).collect(Collectors.toList());
     }
 
-    public static  List<String[]> preproccessFile(List<String[]> list) {
+    public static  List<String[]> preproccessList(List<String[]> list) {
         List<String[]> newList = new LinkedList<>();
         String[] array = new String[10];
         System.arraycopy(list.get(0), 0, array, 0, 6);
@@ -61,7 +56,7 @@ public final class Preproccessor {
 //        list.stream().map(array -> String.join(",", Arrays.stream(array)));
 //    }
 
-    public void writeAllLinesToFile(List<String[]> lines, Path path) throws Exception {
+    public static void writeAllLinesToFile(List<String[]> lines, Path path) throws Exception {
         try (CSVWriter writer = new CSVWriter(new FileWriter(path.toString()))) {
             writer.writeAll(lines);
         }
