@@ -1,5 +1,8 @@
 package utilites;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -7,8 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Calculator {
+    @Setter
     private static double SMA_15_COUNTER = 0;
+    @Setter
     private static double SMA_45_COUNTER = 0;
+    @Setter
     private static double RSI_COUNTER = 0;
     private static List<Double> SMA_15_STORAGE = new ArrayList<>(15);
     private static List<Double> SMA_45_STORAGE = new ArrayList<>(45);
@@ -33,11 +39,11 @@ public final class Calculator {
         if (RSI_COUNTER >= 14) {
             for (int i = 0; i < 13; i++) {
                 differences[i] = RSI_14_STORAGE.get(i + 1) - RSI_14_STORAGE.get(i);
-                positiveSum = Arrays.stream(differences).filter(change -> change > 0).sum();
-                negativeSum = Arrays.stream(differences).filter(change -> change < 0).sum();
-                negativeSum = Math.abs(negativeSum);
-                result = 100 - (100 / (1 + positiveSum / negativeSum));
             }
+            positiveSum = Arrays.stream(differences).filter(change -> change > 0).sum();
+            negativeSum = Arrays.stream(differences).filter(change -> change < 0).sum();
+            negativeSum = Math.abs(negativeSum);
+            result = 100 - (100 / (1 + positiveSum / negativeSum));
         }
         return round(result, 3);
     }
