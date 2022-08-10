@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        final String sourceDirectory = "C:\\Users\\Admin\\Desktop\\Praca magisterska R\\data\\RNN\\Data\\Stock_price_prediction\\Data\\Stocks";
-        final String targetDirectory = "C:\\Users\\Admin\\Desktop\\Praca magisterska R\\data\\RNN\\Data\\Stock_price_prediction\\Data\\PreproccessedStocks";
+        final String sourceDirectory = "C:\\Users\\Admin\\Desktop\\Praca magisterska R\\Data\\Stock_price_prediction\\Stocks";
+        final String targetDirectory = "C:\\Users\\Admin\\Desktop\\Praca magisterska R\\Data\\Stock_price_prediction\\PreproccessedStocks";
         try {
             String[] pathnames;
             File f = new File(sourceDirectory);
