@@ -9,9 +9,7 @@ class CalculatorTest {
 
     @BeforeEach
     void setup() {
-        Calculator.setSMA_15_COUNTER(0);
-        Calculator.setSMA_45_COUNTER(0);
-        Calculator.setSMA_15_COUNTER(0);
+        Calculator.resetCounters();
     }
 
     @Test

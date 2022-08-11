@@ -16,6 +16,7 @@ public class Main {
             for (String fileName : pathnames) {
                 Calculator.resetCounters();
                 Calculator.clearStorages();
+                Calculator.resetPREVIOUS_RSI();
                 List<String[]> lines = Preproccessor.readFile(sourceDirectory + "\\" + fileName);
                 List<String[]> newLines = Preproccessor.preproccessList(lines);
                 Preproccessor.writeAllLinesToFile(newLines, Path.of(targetDirectory + "\\" + fileName));

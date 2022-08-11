@@ -9,15 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Calculator {
-    @Setter
     private static double SMA_15_COUNTER = 0;
-    @Setter
     private static double SMA_45_COUNTER = 0;
-    @Setter
     private static double RSI_COUNTER = 0;
     private static List<Double> SMA_15_STORAGE = new ArrayList<>(15);
     private static List<Double> SMA_45_STORAGE = new ArrayList<>(45);
     private static List<Double> RSI_14_STORAGE = new ArrayList<>(14);
+    private static double PREVIOUS_RSI = 0;
 
     private Calculator() {
 
@@ -30,9 +28,13 @@ public final class Calculator {
     }
 
     public static void resetCounters() {
-        Calculator.setRSI_COUNTER(0);
-        Calculator.setSMA_15_COUNTER(0);
-        Calculator.setSMA_45_COUNTER(0);
+        RSI_COUNTER = 0;
+        SMA_15_COUNTER = 0;
+        SMA_45_COUNTER = 0;
+    }
+
+    public static void resetPREVIOUS_RSI() {
+        PREVIOUS_RSI = 0;
     }
 
     public static double calculateRSI(double closePrice) {
@@ -54,13 +56,18 @@ public final class Calculator {
             positiveSum = Arrays.stream(differences).filter(change -> change > 0).sum();
             negativeSum = Arrays.stream(differences).filter(change -> change < 0).sum();
             negativeSum = Math.abs(negativeSum);
-            result = 100 - (100 / (1 + positiveSum / negativeSum));
+            if (negativeSum == 0 && positiveSum == 0) {
+                result = PREVIOUS_RSI;
+            } else {
+                result = 100 - (100 / (1 + positiveSum / negativeSum));
+                PREVIOUS_RSI = result;
+            }
         }
-        System.out.println("=====================");
+       /* System.out.println("=====================");
         System.out.println("positiveSum= " + positiveSum);
         System.out.println("negativeSum= " + negativeSum);
         System.out.println("result= " + result);
-        System.out.println("=====================");
+        System.out.println("=====================");*/
         return round(result, 3);
     }
 
