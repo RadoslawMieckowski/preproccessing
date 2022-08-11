@@ -14,9 +14,8 @@ public class Main {
             File f = new File(sourceDirectory);
             pathnames = f.list();
             for (String fileName : pathnames) {
-                Calculator.setRSI_COUNTER(0);
-                Calculator.setSMA_15_COUNTER(0);
-                Calculator.setSMA_45_COUNTER(0);
+                Calculator.resetCounters();
+                Calculator.clearStorages();
                 List<String[]> lines = Preproccessor.readFile(sourceDirectory + "\\" + fileName);
                 List<String[]> newLines = Preproccessor.preproccessList(lines);
                 Preproccessor.writeAllLinesToFile(newLines, Path.of(targetDirectory + "\\" + fileName));

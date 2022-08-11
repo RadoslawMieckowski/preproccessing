@@ -23,11 +23,23 @@ public final class Calculator {
 
     }
 
+    public static void clearStorages() {
+        RSI_14_STORAGE.clear();
+        SMA_15_STORAGE.clear();
+        SMA_45_STORAGE.clear();
+    }
+
+    public static void resetCounters() {
+        Calculator.setRSI_COUNTER(0);
+        Calculator.setSMA_15_COUNTER(0);
+        Calculator.setSMA_45_COUNTER(0);
+    }
+
     public static double calculateRSI(double closePrice) {
         RSI_COUNTER++;
         double differences[] = new double[13];
-        double negativeSum;
-        double positiveSum;
+        double negativeSum = 0;
+        double positiveSum = 0;
         double result = 0;
         //atualizowanie ostatnich 14-stu cen potrzebnych do wyliczenia średniej
         if (RSI_14_STORAGE.size() == 14) {
@@ -44,6 +56,11 @@ public final class Calculator {
             negativeSum = Math.abs(negativeSum);
             result = 100 - (100 / (1 + positiveSum / negativeSum));
         }
+        System.out.println("=====================");
+        System.out.println("positiveSum= " + positiveSum);
+        System.out.println("negativeSum= " + negativeSum);
+        System.out.println("result= " + result);
+        System.out.println("=====================");
         return round(result, 3);
     }
 
