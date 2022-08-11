@@ -18,6 +18,10 @@ public class Main {
                 Calculator.clearStorages();
                 Calculator.resetPREVIOUS_RSI();
                 List<String[]> lines = Preproccessor.readFile(sourceDirectory + "\\" + fileName);
+                //jeżeli plik jest pusty, to przejdź do następnego pliku
+                if (lines.size() == 0) {
+                    continue;
+                }
                 List<String[]> newLines = Preproccessor.preproccessList(lines);
                 Preproccessor.writeAllLinesToFile(newLines, Path.of(targetDirectory + "\\" + fileName));
             }

@@ -56,6 +56,7 @@ public final class Calculator {
             positiveSum = Arrays.stream(differences).filter(change -> change > 0).sum();
             negativeSum = Arrays.stream(differences).filter(change -> change < 0).sum();
             negativeSum = Math.abs(negativeSum);
+            //jeżeli negativeSum i positiveSum wynoszą 0, wskaźnik RSI pozostaje bez zmian
             if (negativeSum == 0 && positiveSum == 0) {
                 result = PREVIOUS_RSI;
             } else {
@@ -63,11 +64,6 @@ public final class Calculator {
                 PREVIOUS_RSI = result;
             }
         }
-       /* System.out.println("=====================");
-        System.out.println("positiveSum= " + positiveSum);
-        System.out.println("negativeSum= " + negativeSum);
-        System.out.println("result= " + result);
-        System.out.println("=====================");*/
         return round(result, 3);
     }
 
